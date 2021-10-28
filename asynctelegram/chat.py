@@ -1,12 +1,16 @@
 from .http import Http
+from .bot import Bot
+
 from typing import Union
 
 class Chat(object):
 
-    def __init__(self, data: dict, http: Http=None):
+    def __init__(self, data: dict, bot: Bot=None):
         self.raw = data
+        self.bot = bot
 
-        self.http = http
+        if bot:
+            self.http: Http = bot.http
 
         self.id: int = data.get("id")
         self.type: str = data.get("type")
@@ -16,7 +20,4 @@ class Chat(object):
         self.last_name: Union[str, None] = data.get("last_name")
 
     async def send(self, text):
-        return await self.http.post("sendMessage", {
-            "chat_id": self.id,
-            "text": text
-        })
+        return await self.bot.send_message(self.id, text)

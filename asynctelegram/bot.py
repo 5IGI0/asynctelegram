@@ -28,6 +28,12 @@ class Bot(object):
             if not command.hidden:
                 yield command
 
+    async def send_message(self, chat_id, text):
+        return await self.http.post("sendMessage", {
+            "chat_id": chat_id,
+            "text": text
+        })
+
     def command(self, name: Union[str, None]=None, description: str="no description", hide: bool=False):
 
         def decorator(func):

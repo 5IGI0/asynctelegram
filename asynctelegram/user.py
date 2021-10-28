@@ -1,11 +1,14 @@
 from .http import Http
+from .bot import Bot
 
 class User(object):
 
-    def __init__(self, data: dict, http: Http=None):
+    def __init__(self, data: dict, bot: Bot=None):
         self.raw = data
+        self.bot = bot
 
-        self.http = http
+        if bot:
+            self.http = bot.http
 
         self.first_name = data.get("first_name")
         self.last_name = data.get("last_name")
@@ -15,7 +18,4 @@ class User(object):
         self.id = data.get("id")
 
     async def send(self, text):
-        return await self.http.post("sendMessage", {
-            "chat_id": self.id,
-            "text": text
-        })
+        return self.bot.send_message(self.id, text)

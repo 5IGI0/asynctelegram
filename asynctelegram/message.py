@@ -1,15 +1,19 @@
 from .http import Http
 from .user import User
 from .chat import Chat
+from .bot import Bot
 
 class Message(object):
     
-    def __init__(self, data: dict, http: Http=None):
+    def __init__(self, data: dict, bot: Bot=None):
         self.raw = data
+        self.bot = bot
 
-        self.http = http
-        self.author = User(data.get("from"), http=http) if data.get("from") else None
-        self.chat = Chat(data.get("chat"), http=http)
+        if bot:
+            self.http = self.bot
+
+        self.author = User(data.get("from"), bot=bot) if data.get("from") else None
+        self.chat = Chat(data.get("chat"), bot=bot)
 
         self.id = data.get("message_id")
         self.date = data.get("date")
