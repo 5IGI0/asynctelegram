@@ -23,7 +23,7 @@ class Bot(object):
     def stop(self):
         self.__stop = True
 
-    def get_public_commends(self):
+    def get_public_commands(self):
         for command in self.commands:
             if not command.hidden:
                 yield command
@@ -72,7 +72,7 @@ class Bot(object):
 
         await self.http.post("deleteMyCommands")
         await self.http.post("setMyCommands", {
-            "commands": [command.to_botcommand() for command in self.get_public_commends()]
+            "commands": [command.to_botcommand() for command in self.get_public_commands()]
         })
 
         self.__stop = False

@@ -7,6 +7,11 @@ class MyBot(Bot):
 
 bot = MyBot()
 
+# Decorator's parameters:
+#   name[str]       : Command name           | Default: Function's name
+#   description[str]: Command Description    | Default: "no description"
+#   hide[bool]      : Is the function hidden | Default: False
+#                     on the autocomplation
 @bot.command(hide=True)
 async def start(ctx, args):
     cliched_sentences = {
