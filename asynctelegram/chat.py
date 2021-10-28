@@ -1,11 +1,11 @@
 from .http import Http
-from .bot import Bot
+# from .bot import Bot
 
 from typing import Union
 
 class Chat(object):
 
-    def __init__(self, data: dict, bot: Bot=None):
+    def __init__(self, data: dict, bot=None):
         self.raw = data
         self.bot = bot
 

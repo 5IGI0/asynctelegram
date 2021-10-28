@@ -1,9 +1,9 @@
 from .http import Http
-from .bot import Bot
+# from .bot import Bot
 
 class User(object):
 
-    def __init__(self, data: dict, bot: Bot=None):
+    def __init__(self, data: dict, bot=None):
         self.raw = data
         self.bot = bot
 

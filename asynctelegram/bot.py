@@ -62,7 +62,7 @@ class Bot(object):
                     update_offset = update["update_id"]
 
                 if update.get("message"):
-                    msg = Message(update.get("message"), http=self.http)
+                    msg = Message(update.get("message"), bot=self)
                     asyncio.create_task(self.on_message(msg))
 
                     for command in self.commands:
@@ -72,7 +72,7 @@ class Bot(object):
     async def __start(self, token: str):
         self.http = Http(token)
 
-        self.user = User(await self.http.get("getMe"), http=self.http)
+        self.user = User(await self.http.get("getMe"), bot=self)
 
         await self.on_login()
 

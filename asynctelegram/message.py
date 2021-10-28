@@ -1,11 +1,11 @@
 from .http import Http
 from .user import User
 from .chat import Chat
-from .bot import Bot
+# from .bot import Bot
 
 class Message(object):
     
-    def __init__(self, data: dict, bot: Bot=None):
+    def __init__(self, data: dict, bot=None):
         self.raw = data
         self.bot = bot
 
